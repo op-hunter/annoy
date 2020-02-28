@@ -150,6 +150,9 @@ inline Node* get_node_ptr(const void* _nodes, const size_t _s, const S i) {
   return (Node*)((uint8_t *)_nodes + (_s * i));
 }
 
+/*
+ * get the dot product of two vector x and y in f-dim space
+ */
 template<typename T>
 inline T dot(const T* x, const T* y, int f) {
   T s = 0;
@@ -161,6 +164,9 @@ inline T dot(const T* x, const T* y, int f) {
   return s;
 }
 
+/*
+ * get manhattan distance of two vector x and y in f-dim space
+ */
 template<typename T>
 inline T manhattan_distance(const T* x, const T* y, int f) {
   T d = 0.0;
@@ -345,6 +351,9 @@ inline T get_norm(T* v, int f) {
   return sqrt(dot(v, v, f));
 }
 
+/*
+ * chose two center point of cluster
+ */
 template<typename T, typename Random, typename Distance, typename Node>
 inline void two_means(const vector<Node*>& nodes, int f, Random& random, bool cosine, Node* p, Node* q) {
   /*
@@ -592,6 +601,7 @@ struct DotProduct : Angular {
       node->dot_factor = norm;
     }
 
+    // TODO: to be improved
     // Step two: find the maximum norm
     T max_norm = 0;
     for (S i = 0; i < node_count; i++) {
@@ -818,14 +828,20 @@ class AnnoyIndexInterface {
   virtual T get_distance(S i, S j) const = 0;
   virtual void get_nns_by_item(S item, size_t n, size_t search_k, vector<S>* result, vector<T>* distances) const = 0;
   virtual void get_nns_by_vector(const T* w, size_t n, size_t search_k, vector<S>* result, vector<T>* distances) const = 0;
-  virtual S get_n_items() const = 0;
-  virtual S get_n_trees() const = 0;
-  virtual void verbose(bool v) = 0;
-  virtual void get_item(S item, T* v) const = 0;
+  virtual S get_n_items() const = 0;// get num of vectors
+  virtual S get_n_trees() const = 0;// get num of index trees
+  virtual void verbose(bool v) = 0; // open switch of log
+  virtual void get_item(S item, T* v) const = 0;// get vector by id
   virtual void set_seed(int q) = 0;
   virtual bool on_disk_build(const char* filename, char** error=NULL) = 0;
 };
 
+/*
+ * S: type of vector_id
+ * T: type of vector
+ * Distance: type of metrics
+ * Random: type of random
+ */
 template<typename S, typename T, typename Distance, typename Random>
   class AnnoyIndex : public AnnoyIndexInterface<S, T> {
   /*
@@ -840,24 +856,24 @@ public:
   typedef typename D::template Node<S, T> Node;
 
 protected:
-  const int _f;
-  size_t _s;
-  S _n_items;
-  Random _random;
+  const int _f;//dimension of vectors
+  size_t _s;//size of each node
+  S _n_items;// num of vectors        (upper bound of item space)
+  Random _random;//random generator
   void* _nodes; // Could either be mmapped, or point to a memory buffer that we reallocate
-  S _n_nodes;
-  S _nodes_size;
-  vector<S> _roots;
-  S _K;
-  bool _loaded;
-  bool _verbose;
-  int _fd;
-  bool _on_disk;
-  bool _built;
+  S _n_nodes;//num of vectors
+  S _nodes_size;//size of nodes array
+  vector<S> _roots;//roots of trees in index
+  S _K;// num of children
+  bool _loaded;//whether index loaded
+  bool _verbose;// switch of log
+  int _fd;//file descriptor of index file
+  bool _on_disk;// whether build index on disk directily
+  bool _built;// whether index been built
 public:
 
    AnnoyIndex(int f) : _f(f), _random() {
-    _s = offsetof(Node, v) + _f * sizeof(T); // Size of each node
+    _s = offsetof(Node, v) + _f * sizeof(T); // Size of each node    size = size of header + sizeof vectors in f-dim space
     _verbose = false;
     _built = false;
     _K = (S) (((size_t) (_s - offsetof(Node, children))) / sizeof(S)); // Max number of descendants to fit into node
@@ -875,10 +891,11 @@ public:
     return add_item_impl(item, w, error);
   }
 
+  //TODO: W?
   template<typename W>
   bool add_item_impl(S item, const W& w, char** error=NULL) {
     if (_loaded) {
-      set_error_from_string(error, "You can't add an item to a loaded index");
+      set_error_from_string(error, "You can't add an item to a loaded index");// !!Annoy doesn't support add vector dynamicly
       return false;
     }
     _allocate_size(item + 1);
@@ -910,7 +927,7 @@ public:
       return false;
     }
     _nodes_size = 1;
-    if (ftruncate(_fd, _s * _nodes_size) == -1) {
+    if (ftruncate(_fd, _s * _nodes_size) == -1) {// resize index file
       set_error_from_errno(error, "Unable to truncate");
       return false;
     }
@@ -935,7 +952,7 @@ public:
 
     D::template preprocess<T, S, Node>(_nodes, _s, _n_items, _f);
 
-    _n_nodes = _n_items;
+    _n_nodes = _n_items;//todo ?
     while (1) {
       if (q == -1 && _n_nodes >= _n_items * 2)
         break;
@@ -944,6 +961,7 @@ public:
       if (_verbose) showUpdate("pass %zd...\n", _roots.size());
 
       vector<S> indices;
+      //pick valid index of nodes
       for (S i = 0; i < _n_items; i++) {
         if (_get(i)->n_descendants >= 1) // Issue #223
           indices.push_back(i);
@@ -1091,6 +1109,7 @@ public:
         break;
       }
     }
+    //todo ?
     // hacky fix: since the last root precedes the copy of all roots, delete it
     if (_roots.size() > 1 && _get(_roots.front())->children[0] == _get(_roots.back())->children[0])
       _roots.pop_back();
@@ -1269,11 +1288,11 @@ protected:
       S i = top.second;
       Node* nd = _get(i);
       q.pop();
-      if (nd->n_descendants == 1 && i < _n_items) {
+      if (nd->n_descendants == 1 && i < _n_items) {//raw data
         nns.push_back(i);
       } else if (nd->n_descendants <= _K) {
         const S* dst = nd->children;
-        nns.insert(nns.end(), dst, &dst[nd->n_descendants]);
+        nns.insert(nns.end(), dst, &dst[nd->n_descendants]);//todo???
       } else {
         T margin = D::margin(nd, v, _f);
         q.push(make_pair(D::pq_distance(d, margin, 1), static_cast<S>(nd->children[1])));
