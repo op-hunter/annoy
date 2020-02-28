@@ -109,7 +109,11 @@ int precision(int f=40, int n=1000000, int n_trees = 10, int search_k = 10, int 
 //        int j = n - 1;
 //        results.resize(top_k);
         std::cout << "query id: " << j << std::endl;
-        t.delete_vec_by_id(j);
+        try {
+            t.delete_vec_by_id(j);
+        } catch (...) {
+            std::cout << "delete failed!" << std::endl;
+        }
         std::cout << "the deleted vec:" << std::endl;
         for (auto dd = 0; dd < f; ++ dd)
             std::cout << read_data[j * f + dd] << "  ";

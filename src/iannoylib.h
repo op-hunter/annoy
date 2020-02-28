@@ -919,6 +919,10 @@ public:
                   << ", current n_item: " << _n_items
                   << ", des: " << x->n_descendants << std::endl;
 //        x->n_descendants = 0;//mark as deleted
+        D::zero_value(x);
+        std::cout << "got node at:" << x
+                  << ", current n_item: " << _n_items
+                  << ", des: " << x->n_descendants << std::endl;
         x->n_descendants = 0;
         std::cout << "delete succ!" << std::endl;
         return true;
