@@ -46,7 +46,7 @@ int precision(int f=40, int n=1000000, int n_trees = 10, int search_k = 10, int 
 
     //******************************************************
     //Building the tree
-    AnnoyIndex<int, double, Angular, Kiss32Random> t = AnnoyIndex<int, double, Angular, Kiss32Random>(f);
+    AnnoyIndex<int, float, Angular, Kiss32Random> t = AnnoyIndex<int, float, Angular, Kiss32Random>(f);
 
     std::cout << "Building index ... be patient !!" << std::endl;
     std::cout << "\"Trees that are slow to grow bear the best fruit\" (Moliere)" << std::endl;
@@ -60,7 +60,7 @@ int precision(int f=40, int n=1000000, int n_trees = 10, int search_k = 10, int 
     std::cout << "start insert vectors into AnnoyIndex..." << std::endl;
     t_start = std::chrono::high_resolution_clock::now();
     long base = 0;
-    double *vec = (double *) malloc( f * sizeof(double) );
+    float *vec = (float *) malloc( f * sizeof(float) );
     for(int i=0; i<n; ++i){
         base = (long)f * i;
 
@@ -93,12 +93,22 @@ int precision(int f=40, int n=1000000, int n_trees = 10, int search_k = 10, int 
     auto duration = std::chrono::duration_cast<std::chrono::seconds>( t_end - t_start ).count();
     std::cout << "Build Index Done in "<< duration << " secs." << std::endl;
     std::cout << "index info: " << std::endl;
+    std::cout << ">>>>>>>>>>>>>>>after build index info:" << std::endl;
     t.show_info();
+    std::cout << ">>>>>>>>>>>>>>>" << std::endl;
 
     std::cout << "Saving index ...";
-    t.save("precision.tree");
+    char** err_msg;
+    if (t.save("precision.tree", false, err_msg)) {
+        std::cout << "save succ!" << std::endl;
+    } else {
+        std::cout << "save failed! error msg: " << *err_msg << std::endl;
+    }
     std::cout << "Save Done" << std::endl;
 
+    std::cout << ">>>>>>>>>>>>>>>after save info:" << std::endl;
+    t.show_info();
+    std::cout << ">>>>>>>>>>>>>>>" << std::endl;
 
 
     //******************************************************

@@ -918,12 +918,20 @@ public:
         std::cout << "got node at:" << x
                   << ", current n_item: " << _n_items
                   << ", des: " << x->n_descendants << std::endl;
+        std::cout << "addr of node x: " << x
+                  << ", addr of x->n_descendants: " << &(x->n_descendants)
+                  << std::endl;
+        std::cout << "fd : " << _fd << std::endl;
 //        x->n_descendants = 0;//mark as deleted
-        D::zero_value(x);
+        x->n_descendants = 0;
+//        memset((char*)&(x->n_descendants), 0, sizeof(S));
+//        char* p = (char*)x;
+//        memset(x, 0, sizeof(S));
+//        S* pd __attribute__((aligned(1))) = &(*x).n_descendants;
+//        (*pd) = 0;
         std::cout << "got node at:" << x
                   << ", current n_item: " << _n_items
                   << ", des: " << x->n_descendants << std::endl;
-        x->n_descendants = 0;
         std::cout << "delete succ!" << std::endl;
         return true;
     }
@@ -1104,7 +1112,8 @@ public:
     }
 
     bool load(const char* filename, bool prefault=false, char** error=NULL) {
-        _fd = open(filename, O_RDONLY, (int)0400);
+//        _fd = open(filename, O_RDONLY, (int)0400);
+        _fd = open(filename, O_RDWR | O_CREAT, (int)0777);
         if (_fd == -1) {
             set_error_from_errno(error, "Unable to open");
             _fd = 0;
@@ -1131,7 +1140,7 @@ public:
             showUpdate("prefault is set to true, but MAP_POPULATE is not defined on this platform");
 #endif
         }
-        _nodes = (Node*)mmap(0, size, PROT_READ, flags, _fd, 0);
+        _nodes = (Node*)mmap(0, size, PROT_READ | PROT_WRITE, flags, _fd, 0);
         _n_nodes = (S)(size / _s);
 
         // Find the roots by scanning the end of the file and taking the nodes with most descendants
