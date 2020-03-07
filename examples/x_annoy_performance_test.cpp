@@ -4,13 +4,14 @@
 #include <iostream>
 #include <iomanip>
 #include "../src/kissrandom.h"
-#include "../src/annoylib.h"
+#include "../src/xannoylib.h"
 #include <chrono>
 #include <algorithm>
 #include <map>
 #include <random>
 #include "/usr/local/include/hdf5.h"
 #include "/usr/local/include/H5Cpp.h"
+#include "../src/ConcurrentBitset.h"
 using namespace H5;
 
 std::string file_path = "/Users/ophunter/Documents/workspace/data/";
@@ -81,6 +82,10 @@ int precision(int f=40, int n=1000000, int n_trees = 10, int search_k = 10, int 
     t_end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>( t_end - t_start ).count();
     std::cout << "Build Index Done in "<< duration << " ms." << std::endl;
+    std::cout << "index info: " << std::endl;
+    std::cout << ">>>>>>>>>>>>>>>after build index info:" << std::endl;
+    t.show_info();
+    std::cout << ">>>>>>>>>>>>>>>" << std::endl;
 
     std::cout << "Saving index ...";
     char** err_msg;
@@ -90,6 +95,10 @@ int precision(int f=40, int n=1000000, int n_trees = 10, int search_k = 10, int 
         std::cout << "save failed! error msg: " << *err_msg << std::endl;
     }
     std::cout << "Save Done" << std::endl;
+
+    std::cout << ">>>>>>>>>>>>>>>after save info:" << std::endl;
+    t.show_info();
+    std::cout << ">>>>>>>>>>>>>>>" << std::endl;
     */
     std::cout << "Loading index ..." << std::endl;
     t_start = std::chrono::high_resolution_clock::now();
@@ -98,19 +107,22 @@ int precision(int f=40, int n=1000000, int n_trees = 10, int search_k = 10, int 
     auto load_duration = std::chrono::duration_cast<std::chrono::milliseconds>( t_end - t_start ).count();
     std::cout << "Load Index Done in "<< load_duration << " ms." << std::endl;
 
+
     //******************************************************
     std::vector<int> results;
+    faiss::ConcurrentBitsetPtr bitset = std::make_shared<faiss::ConcurrentBitset>(n + 1);
     t_start = std::chrono::high_resolution_clock::now();
     for (auto i = 0; i < query_times; ++ i) {
         int j = rand() % n + 1;
 //        int j = n - 1;
 //        results.resize(top_k);
         std::cout << "query id: " << j << std::endl;
+        bitset->set(j);
 //        std::cout << "the deleted vec:" << std::endl;
 //        for (auto dd = 0; dd < f; ++ dd)
 //            std::cout << read_data[j * f + dd] << "  ";
 //        std::cout << std::endl;
-        t.get_nns_by_item(j, top_k, search_k, &results, nullptr);
+        t.get_nns_by_item(j, top_k, search_k, &results, nullptr, bitset);
         std::cout << "the " << i + 1 << "th query result:" << std::endl;
         for (auto c = 0; c < results.size(); ++ c) {
             std::cout << "result id: " << results[c] << std::endl;

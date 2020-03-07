@@ -1,0 +1,41 @@
+Runing precision example with:
+num. features: 128
+num. nodes: 1000000
+num. trees: 100
+num. inspect nodes: 100
+
+enter test function, args: dim = 128num of vectors = 1000000num of query times = 5num of results = 1n_trees = 100
+Building index ... be patient !!
+"Trees that are slow to grow bear the best fruit" (Moliere)
+start load data from /Users/ophunter/Documents/workspace/data/sift-128-euclidean.hdf5
+data load finished, new dim: 128, new num of vectors: 1000000
+start insert vectors into AnnoyIndex...
+Insert Done in 1022 ms.
+
+Building index num_trees = 100 ...
+Build Index Done in 1352713 ms.
+Saving index ...save succ!
+Save Done
+query id: 16808
+the 1th query result:
+result id: 16808
+-------------------------------------------------------------------------
+query id: 475250
+the 2th query result:
+result id: 475250
+-------------------------------------------------------------------------
+query id: 650074
+the 3th query result:
+result id: 650074
+-------------------------------------------------------------------------
+query id: 943659
+the 4th query result:
+result id: 943659
+-------------------------------------------------------------------------
+query id: 108931
+the 5th query result:
+result id: 108931
+-------------------------------------------------------------------------
+Query Done in 387 ms. of 5 times query
+
+Test Done

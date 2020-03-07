@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="annoy"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/ophunter/Documents/workspace/annoy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/ophunter/Documents/workspace/annoy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/ophunter/Documents/workspace/annoy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="annoy">
+				<Option output="/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/annoy" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ophunter/Documents/workspace/annoy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ophunter/Documents/workspace/annoy/examples"/>
+					<Add directory="/Users/ophunter/Documents/workspace/annoy/src"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 annoy"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="annoy/fast">
+				<Option output="/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/annoy" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ophunter/Documents/workspace/annoy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ophunter/Documents/workspace/annoy/examples"/>
+					<Add directory="/Users/ophunter/Documents/workspace/annoy/src"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 annoy/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/examples/cmli_test.cpp">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/examples/new_annoy_test.cpp">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/examples/precision_test.cpp">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/examples/raw_annoy_index_size_test.cpp">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/examples/raw_annoy_test.cpp">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/examples/read_hdf5.cpp">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/examples/x_annoy_correctness_test.cpp">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/examples/x_annoy_del_performance_test.cpp">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/examples/x_annoy_performance_test.cpp">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/ConcurrentBitset.cpp">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/ConcurrentBitset.h">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/annoygomodule.h">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/annoygomodule.i">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/annoylib.h">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/annoyluamodule.cc">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/annoymodule.cc">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/iannoylib.h">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/kissrandom.h">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/mman.h">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/src/xannoylib.h">
+			<Option target="annoy"/>
+		</Unit>
+		<Unit filename="/Users/ophunter/Documents/workspace/annoy/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

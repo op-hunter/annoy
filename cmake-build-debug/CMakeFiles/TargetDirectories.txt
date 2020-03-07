@@ -1,0 +1,3 @@
+/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/ophunter/Documents/workspace/annoy/cmake-build-debug/CMakeFiles/annoy.dir

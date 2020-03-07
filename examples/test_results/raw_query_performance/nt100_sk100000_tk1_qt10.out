@@ -1,0 +1,52 @@
+Runing precision example with:
+num. features: 128
+num. nodes: 1000000
+num. trees: 100
+num. inspect nodes: 100000
+
+enter test function, args: dim = 128num of vectors = 1000000num of query times = 10num of results = 1n_trees = 100
+Loading index ...
+Load Index Done in 0 ms.
+query id: 16808
+the 1th query result:
+result id: 16808
+-------------------------------------------------------------------------
+query id: 475250
+the 2th query result:
+result id: 475250
+-------------------------------------------------------------------------
+query id: 650074
+the 3th query result:
+result id: 650074
+-------------------------------------------------------------------------
+query id: 943659
+the 4th query result:
+result id: 943659
+-------------------------------------------------------------------------
+query id: 108931
+the 5th query result:
+result id: 108931
+-------------------------------------------------------------------------
+query id: 211273
+the 6th query result:
+result id: 211273
+-------------------------------------------------------------------------
+query id: 27545
+the 7th query result:
+result id: 27545
+-------------------------------------------------------------------------
+query id: 850879
+the 8th query result:
+result id: 850879
+-------------------------------------------------------------------------
+query id: 777924
+the 9th query result:
+result id: 777924
+-------------------------------------------------------------------------
+query id: 237710
+the 10th query result:
+result id: 237710
+-------------------------------------------------------------------------
+Query Done in 474 ms. of 10 times query
+
+Test Done
